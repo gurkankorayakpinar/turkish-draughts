@@ -9,12 +9,39 @@
 </head>
 
 <body>
-    <div class="game-container">
-        <h1>Türk Daması</h1>
-        <div id="status-bar">Sıra: <span id="current-player">Beyaz</span></div>
+    <div class="main-container">
         <div id="board" class="board"></div>
-        <button id="reset-btn">Yeni Oyun</button>
+
+        <div class="side-panel">
+            <div class="header">
+                <h2>Notasyon</h2>
+                <div id="status" class="status-badge">Hamle: Beyaz</div>
+            </div>
+
+            <div class="move-history-container">
+                <table class="move-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Beyaz</th>
+                            <th>Siyah</th>
+                        </tr>
+                    </thead>
+                    <tbody id="moveList"></tbody>
+                </table>
+            </div>
+
+            <div class="controls">
+                <div class="button-group-top">
+                    <button id="undoBtn" class="secondary-btn">Geri Al</button>
+                    <button id="copyBtn" class="secondary-btn">Notasyonu Kopyala</button>
+                </div>
+                <button id="resetBtn" class="primary-btn">Yeni Oyun</button>
+            </div>
+        </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="script.js"></script>
 </body>
 
