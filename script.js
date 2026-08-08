@@ -19,6 +19,7 @@ let moveHistory = [];
 let currentViewIndex = 0;
 let currentNotation = "";
 let lastJumpDir = null;
+let isGameOver = false;
 
 function initGame() {
     boardState = Array(8).fill(null).map(() => Array(8).fill(null));
@@ -37,6 +38,7 @@ function initGame() {
     currentViewIndex = 0;
     currentNotation = "";
     lastJumpDir = null;
+    isGameOver = false;
 
     calculateGlobalMax();
     updateUI();
@@ -160,6 +162,7 @@ function renderBoard() {
 }
 
 function handleSquareClick(r, c) {
+    if (isGameOver) return;
     if (currentViewIndex !== historyFens.length - 1) return;
 
     const move = availableMoves.find(m => m.r === r && m.c === c);
@@ -238,7 +241,7 @@ function executeMove(from, to) {
 
     if (to.captured) {
         boardState[to.captured.r][to.captured.c] = null;
-        currentNotation += ":" + getSquareName(to.r, to.c);
+        currentNotation += "x" + getSquareName(to.r, to.c);
 
         let nextForbidden = { dr: -to.dir.dr, dc: -to.dir.dc };
         let remainingMax = getMaxCapturesForPiece(to.r, to.c, boardState, turn, nextForbidden);
@@ -292,7 +295,7 @@ function checkGameOver() {
     let statusText = '';
 
     if (w === 1 && b === 1 && globalMaxCaptures === 0) {
-        statusText = "Beraberlik.";
+        statusText = "Beraberlik";
     } else if (w === 0) {
         statusText = "Siyah kazandı.";
     } else if (b === 0) {
@@ -317,6 +320,9 @@ function checkGameOver() {
 
     if (statusText) {
         $status.html(statusText);
+        isGameOver = true;
+    } else {
+        isGameOver = false;
     }
 }
 
@@ -358,9 +364,17 @@ function goToMove(index) {
     if (index < 0 || index >= historyFens.length) return;
     currentViewIndex = index;
 
-    let pastTurn = (index % 2 === 0) ? 'white' : 'black';
-    let moveColor = (pastTurn === 'white') ? 'Beyaz' : 'Siyah';
-    $status.html('Hamle: ' + moveColor);
+    if (currentViewIndex === historyFens.length - 1) {
+        checkGameOver();
+        if (!isGameOver) {
+            let moveColor = (turn === 'white') ? 'Beyaz' : 'Siyah';
+            $status.html('Hamle: ' + moveColor);
+        }
+    } else {
+        let pastTurn = (index % 2 === 0) ? 'white' : 'black';
+        let moveColor = (pastTurn === 'white') ? 'Beyaz' : 'Siyah';
+        $status.html('Hamle: ' + moveColor);
+    }
 
     selectedSquare = null;
     availableMoves = [];
@@ -396,6 +410,7 @@ $('#undoBtn').on('click', () => {
         calculateGlobalMax();
         updateUI();
         renderBoard();
+        checkGameOver();
     }
 });
 
