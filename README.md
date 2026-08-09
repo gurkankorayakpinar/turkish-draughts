@@ -20,11 +20,13 @@
 
 - Notasyon sistemi mevcut olup, notasyonun kopyalanabilmesi sağlanmıştır.
 
-- Ok tuşları kullanılarak önceki hamleler incelenebilmektedir. Ayrıca, bir veya birden fazla hamleyi geri alabilmek için "Geri Al" butonu da mevcuttur. (Bu özellikler, birden fazla taş alınabilen durumlarda, hamle ortasında çalışmamaktadır.)
+- Ok tuşları kullanılarak önceki hamleler incelenebilmektedir. Ayrıca, bir veya birden fazla hamleyi geri alabilmek için "Geri Al" butonu da mevcuttur. (Birden fazla taş alınabilen durumlarda bu özellikler, hamle ortasında değil, hamle tamamlandıktan sonra çalışmaktadır.)
 
 - "Sürükle bırak" sistemi devre dışı bırakılmıştır.
 
 - Herhangi bir taş seçildiğinde, gidebileceği tüm kareler gösterilmektedir.
+
+- DOM manipülasyonu vb. işlemleri kolaylaştırmak için `jQuery` kullanılmıştır.
 
 - Responsive tasarım uygulanmıştır.
 

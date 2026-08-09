@@ -35,7 +35,7 @@ body {
     display: grid;
     grid-template-columns: repeat(8, 80px);
     grid-template-rows: repeat(8, 80px);
-    border: 8px solid #3c3934;
+    border: 10px solid #3c3934;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
 }
 
@@ -89,6 +89,7 @@ body {
 
 .side-panel {
     width: 350px;
+    height: 660px;
     max-width: 100%;
     display: flex;
     flex-direction: column;
@@ -121,7 +122,6 @@ h2 {
 .move-history-container {
     flex-grow: 1;
     overflow-y: auto;
-    max-height: 505px;
 }
 
 .move-table {
@@ -217,6 +217,7 @@ button:hover {
     z-index: 3;
 }
 
+/* Responsive Düzenleme */
 @media (max-width: 1100px) {
     .main-container {
         flex-direction: column;
@@ -224,7 +225,8 @@ button:hover {
     }
 
     .side-panel {
-        width: 656px;
+        width: 660px;
+        height: 400px;
     }
 }
 
